@@ -68,6 +68,11 @@ public class MyThreadPool {
      * 销毁线程池
      */
     public void destory(){
+        for (int i = 0; i < worker_num; i++) {
+            workThreads[i].stopWorker();
+            // Help GC
+            workThreads[i] = null;
+        }
         taskQueue.clear();
     }
 
