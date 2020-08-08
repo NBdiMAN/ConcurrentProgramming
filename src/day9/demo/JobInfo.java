@@ -77,11 +77,14 @@ public class JobInfo<R> {
      * 都是并发安全的操作，只需要保证最终一致性即可，可能中间数据不一致，比如successCount > taskProcesserCount
      * @param taskResult
      */
-    public void addTaskResult(TaskResult<R> taskResult){
+    public void addTaskResult(TaskResult<R> taskResult,CheckJobProcesser checkJobProcesser){
         if(TaskResultType.SUCCESS.equals(taskResult.getResultType())){
             successCount.incrementAndGet();
         }
         taskDetailQueue.addLast(taskResult);
         taskProcesserCount.incrementAndGet();
+        if(taskProcesserCount.get() == jobLength){
+            checkJobProcesser.putJob(jobName, expireTime);
+        }
     }
 }

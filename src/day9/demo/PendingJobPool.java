@@ -1,6 +1,7 @@
 package day9.demo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -23,6 +24,8 @@ public class PendingJobPool {
      */
     private static ConcurrentHashMap<String,JobInfo<?>> jobInfoMap = new ConcurrentHashMap<>();
 
+    private static CheckJobProcesser checkJobProcesser = CheckJobProcesser.getInstance();
+
     private PendingJobPool(){}
 
     private static class JobPoolHolder{
@@ -38,6 +41,10 @@ public class PendingJobPool {
      */
     public static PendingJobPool getInstance(){
         return JobPoolHolder.getPendingJobPool();
+    }
+
+    public static Map<String,JobInfo<?>> getMap(){
+        return jobInfoMap;
     }
 
     /**
@@ -98,6 +105,7 @@ public class PendingJobPool {
         return jobInfo;
     }
 
+
     private static class PendingTask<T,R> implements Runnable{
         /**
          * 任务信息
@@ -141,7 +149,7 @@ public class PendingJobPool {
                         ,e.getMessage()
                 );
             }finally {
-                jobInfo.addTaskResult(result);
+                jobInfo.addTaskResult(result, checkJobProcesser);
             }
         }
     }
