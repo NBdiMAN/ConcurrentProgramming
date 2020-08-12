@@ -20,7 +20,7 @@ public class TestAtomic {
          * return a + 1;
          */
         atomicReference.set("Lee");
-        atomicReference.compareAndSet("Lee", "M");
+        atomicReference.compareAndSet("Lee1", "M");
         System.out.println(atomicReference.get());
         //演示解决ABA问题
         AtomicStampedReference<String> asr = new AtomicStampedReference<>("mx", 0);

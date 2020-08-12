@@ -7,5 +7,5 @@ package day9.demo;
  *                  所以使用泛型
  */
 public interface ITaskProcesser<T,R> {
-    R taskExecute(T t);
+    TaskResult<R> taskExecute(T t);
 }

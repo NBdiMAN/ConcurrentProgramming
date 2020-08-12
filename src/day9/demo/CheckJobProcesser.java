@@ -1,5 +1,6 @@
 package day9.demo;
 
+import java.util.Date;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.DelayQueue;
 
@@ -46,7 +47,7 @@ public class CheckJobProcesser {
                     ItemVo<String> itemVo = queue.take();
                     String jobName = itemVo.getData();
                     PendingJobPool.getMap().remove(jobName);
-                    System.out.println("从保留已完成任务信息的延迟队列中清除：" + jobName);
+                    System.out.println(new Date().toLocaleString() + "从保留已完成任务信息的延迟队列中清除：" + jobName);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -61,6 +62,7 @@ public class CheckJobProcesser {
     public void putJob(String jobName, long expireTime) {
         ItemVo<String> itemVo = new ItemVo<>(expireTime, jobName);
         queue.add(itemVo);
+        System.out.println(new Date().toLocaleString() + "将完成的任务放入延迟队列中保存：" + jobName);
     }
 
 

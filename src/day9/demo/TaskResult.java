@@ -24,6 +24,12 @@ public class TaskResult<R> {
         this.reason = reason;
     }
 
+    public TaskResult(TaskResultType resultType,R returnValue) {
+        this.resultType = resultType;
+        this.returnValue = returnValue;
+        this.reason = null;
+    }
+
     public TaskResultType getResultType() {
         return resultType;
     }
@@ -34,5 +40,14 @@ public class TaskResult<R> {
 
     public String getReason() {
         return reason;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskResult{" +
+                "resultType=" + resultType +
+                ", returnValue=" + returnValue +
+                ", reason='" + reason + '\'' +
+                '}';
     }
 }

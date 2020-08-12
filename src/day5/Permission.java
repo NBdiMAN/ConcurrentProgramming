@@ -16,6 +16,7 @@ public class Permission {
      */
     private int flag;
 
+
     /**
      * 设置用户权限
      * @param per

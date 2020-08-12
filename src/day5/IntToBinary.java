@@ -8,7 +8,6 @@ package day5;
 public class IntToBinary {
     public static void main(String[] args) {
         System.out.println(Integer.toBinaryString(4));
-
         //位与：按位相与
         System.out.println(Integer.toBinaryString(4 & 6));
 

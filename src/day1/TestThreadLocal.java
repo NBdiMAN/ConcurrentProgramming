@@ -18,6 +18,7 @@ public class TestThreadLocal {
             integer++;
             threadLocal.set(integer);
             System.out.println(Thread.currentThread().getName() + "：" + integer);
+            threadLocal.remove();
         }
     }
 
